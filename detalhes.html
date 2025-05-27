@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Detalhes do Encontro - GAM</title>
+  <link rel="stylesheet" href="lib/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+
+
+  <style>
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    @media (max-width: 768px) {
+      .container {
+        max-width: 100%;
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+      h2, h4 {
+        font-size: 1.1rem;
+      }
+      .btn, textarea, select {
+        width: 100%;
+        font-size: 1rem;
+        padding: 10px;
+      }
+    }
+    @media (max-width: 480px) {
+      h2, h4 {
+        font-size: 1rem;
+      }
+      .btn, textarea, select {
+        font-size: 0.95rem;
+        padding: 8px;
+      }
+      .container {
+        padding: 4px;
+      }
+    }
+    .btn-status {
+      padding: 4px 6px;
+      font-size: 0.85rem;
+      margin-right: 4px;
+    }
+    .active-status {
+      font-weight: bold;
+      background-color: #0d6efd;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-4">
+    <a href="encontros.html" class="btn btn-outline-secondary mb-3">Voltar ao Início</a>
+    <h2 id="tituloEncontro"></h2>
+    <p id="dataEncontro"></p>
+
+    <textarea class="form-control mb-3" id="ata" rows="4" placeholder="Ata do Encontro"></textarea>
+    <button class="btn btn-secondary mb-3" id="btnSalvarAta">Salvar Ata</button>
+
+    <h4>Foto do Encontro</h4>
+    <input type="file" id="inputFoto" accept="image/*" class="form-control mb-2" />
+    <img id="fotoEncontro" class="img-fluid mb-3 d-none" alt="Foto do Encontro" />
+    <br>
+    <button class="btn btn-primary mb-3" id="btnUploadFoto">Enviar Foto</button>
+
+
+
+    <h4>Presenças</h4>
+    <div class="table-responsive">
+      <table id="tabelaPresencas" class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Presente</th>
+            <th>Online</th>
+            <th>Falta</th>
+            <th>Justificada</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="lib/bootstrap.bundle.min.js"></script>
+  <script type="module" src="js/detalhes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Modal Justificativa -->
+<div class="modal fade" id="modalJustificativa" tabindex="-1" aria-labelledby="modalJustificativaLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalJustificativaLabel">Justificativa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <textarea id="inputJustificativa" class="form-control" rows="4" placeholder="Digite a justificativa aqui..."></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnCancelarJustificativa" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" id="btnSalvarJustificativa" class="btn btn-primary">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>
