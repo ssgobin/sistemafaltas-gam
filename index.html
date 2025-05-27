@@ -98,5 +98,72 @@
   </div>
 
   <script src="lib/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+  const senhaCorreta = "sistemafaltasgam1212"; // sua senha fixa aqui
+
+  function setCookie(name, value, days) {
+    const d = new Date();
+    d.setTime(d.getTime() + (days*24*60*60*1000));
+    document.cookie = name + "=" + value + ";expires=" + d.toUTCString() + ";path=/";
+  }
+
+  function getCookie(name) {
+    const cname = name + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+      let c = ca[i].trim();
+      if (c.indexOf(cname) == 0) return c.substring(cname.length, c.length);
+    }
+    return "";
+  }
+
+  function pedirSenha() {
+    Swal.fire({
+      title: 'Digite a senha para acessar o sistema:',
+      input: 'password',
+      inputLabel: 'Senha',
+      inputPlaceholder: 'Digite a senha',
+      inputAttributes: {
+        autocapitalize: 'off',
+        autocorrect: 'off'
+      },
+      showCancelButton: false,
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      confirmButtonText: 'Entrar',
+      preConfirm: (senha) => {
+        if (senha !== senhaCorreta) {
+          Swal.showValidationMessage('Senha incorreta. Tente novamente.');
+        }
+        return senha;
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setCookie("acessoGAM", "true", 1); // cookie válido por 1 dia
+        mostrarConteudo();
+      } else {
+        // não permite fechar sem senha correta, então nem precisa disso
+      }
+    });
+  }
+
+  function mostrarConteudo() {
+    document.getElementById("menu-container").style.display = "block";
+  }
+
+  function logout() {
+    setCookie("acessoGAM", "", -1); // apaga o cookie
+    location.reload();
+  }
+
+  // Verifica se já tem cookie de acesso, se não pedir senha
+  if (getCookie("acessoGAM") === "true") {
+    mostrarConteudo();
+  } else {
+    pedirSenha();
+  }
+</script>
 </body>
 </html>
